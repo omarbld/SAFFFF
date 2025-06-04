@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { ProtectedRoute } from '../components/ProtectedRoute';
 
 const Home = lazy(() => import('../pages/Home'));
 const Login = lazy(() => import('../pages/Login'));
@@ -13,7 +14,14 @@ export function AppRoutes() {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/dashboard" element={<Dashboard />} />
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
